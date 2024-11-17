@@ -8,5 +8,5 @@ CHIP zad1a{
 Not(in = x, out = nx);
 Not(in = y, out = ny);
 Or(a = nx, b = ny, out = out);
-
+ 
 }

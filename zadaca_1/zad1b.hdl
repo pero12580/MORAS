@@ -9,5 +9,5 @@ Not(in = y, out = ny);
 
 And(a = x, b = ny, out = xandny);
 And(a = xandny, b = z, out = out);
-
+ 
 }
