@@ -1,0 +1,21 @@
+CHIP RAM512{
+	IN in[16], addr[9], load;
+	OUT out[16];
+
+	PARTS:
+//lijeve tri znamenke se gledaju u koji od ram64 se nalazi adresa
+
+DMux8Way(in=load,sel=addr[6..8] ,a=nul ,b=jed ,c=dva ,d=tri ,e=cet ,f=pet ,g=ses ,h=sed);
+
+RAM64(in=in ,load=nul ,address=addr[0..5] ,out=out0);
+RAM64(in=in ,load=jed ,address=addr[0..5] ,out=out1); // ako je jed==1, na taj ram se ide na adresu i zapisuje in
+RAM64(in=in ,load=dva ,address=addr[0..5] ,out=out2);
+RAM64(in=in ,load=tri ,address=addr[0..5] ,out=out3);
+RAM64(in=in ,load=cet ,address=addr[0..5] ,out=out4);
+RAM64(in=in ,load=pet ,address=addr[0..5] ,out=out5);
+RAM64(in=in ,load=ses ,address=addr[0..5] ,out=out6);
+RAM64(in=in ,load=sed ,address=addr[0..5] ,out=out7);
+
+//gledat sa kojeg rama se cita memorija na adresi
+Mux8Way16(a=out0 ,b=out1 ,c=out2 ,d=out3 ,e=out4 ,f=out5 ,g=out6 ,h=out7 ,sel=addr[6..8] ,out=out );
+}
