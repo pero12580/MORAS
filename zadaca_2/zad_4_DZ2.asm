@@ -1,9 +1,12 @@
-//rpobat samo dijagonalu nap
-// jedan unutrasnji counter ide od 1 do 2^14 pa nazad na 1
-//drugi counter koji dodaje 32 svaki put, pa svakih 16 put doda 33
-
 @SCREEN
 D=A;
+@29
+D=D+A;
+@top  /////// od ovog krece gornje lijevi kut
+M=D;
+////////////////
+@top
+D=M;
 @i
 M=D;
 
@@ -83,8 +86,8 @@ M=M+D;
 
 /////////////////////////okomita
 
-@SCREEN
-D=A;
+@top
+D=M;
 @j
 M=D;
 @512
@@ -127,28 +130,60 @@ M=M+D;
 
 
 //////////////////////////////////horizontalna
-@20480
+@top
+D=M;
+@4096
+D=D+A;
+
+@hor
+M=D;
+
+@hor
+A=M;
 M=-1;
-@20481
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20482
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20483
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20484
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20485
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20486
+
+@hor
+M=M+1;
+A=M;
 M=-1;
-@20487
+
+@hor
+M=M+1;
+A=M;
 M=-1;
+
+
 //////////////////////////////////horizontalna
 
 
 ////////////////// rucno vrh prve dijagonale
-@SCREEN
-D=A;
+@top
+D=M;
 @adr_vrh
 M=D;
 
@@ -196,8 +231,10 @@ M=M+1;
 (end_vrh)
 
 ////////////////////////////////////rucno nap tam di je kut od 90
-@20448
-D=A;
+@top
+D=M;
+@4064
+D=D+A;
 @vrh
 M=D;
 
@@ -367,8 +404,13 @@ M=D;
 
 
 ////////////////////////////////// unutarnja dijagonalica
-@19969
-D=A;
+@top
+D=M;
+@3584
+D=D+A;
+
+D=D+1;
+
 @mala_diag
 M=D;
 
@@ -434,14 +476,6 @@ M=0;
 @mala_diag_start
 0;JMP
 (mala_diag_end)
-
-
-
-
-/// jos sam jedna tocka da lijepo izgleda
-@20488
-M=1;
-
 
 
 
