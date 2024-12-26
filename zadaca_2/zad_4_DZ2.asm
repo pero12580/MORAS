@@ -1,6 +1,6 @@
 @SCREEN
 D=A;
-@29
+@0
 D=D+A;
 @top  /////// od ovog krece gornje lijevi kut
 M=D;
