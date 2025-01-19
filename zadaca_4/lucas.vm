@@ -1,0 +1,66 @@
+
+push constant 5
+call lucas 1
+
+
+function lucas 3  //tri lokalne var, jedna broji na kojem lucasovom broju je loop, dvije prate prethodna dva broja
+
+//////////////////////////////// provjera jel arg 0 == 0 ili == 1
+push argument 0
+push constant 0
+eq
+if-goto nulti
+
+push argument 0
+push constant 1
+eq
+if-goto prvi
+
+push argument 0  /////////////////// oduzima arg 0 - 2, jer za 0 i 1 rucno provjerava, a uzima da je PRVI broj 2, drugi 1, treci 3, cetvrti 4 itd...
+push constant 2
+sub
+pop argument 0
+
+
+push constant 2
+pop local 1  // nulti lucasov broj == 2
+
+push constant 1
+pop local 2  // prvi lucasov broj == 1
+
+
+
+label loop_s 
+//////////////////////////////////////
+push local 0
+push argument 0
+eq
+if-goto loop_e
+////////////////////////////
+push local 2
+push local 2
+push local 1
+add
+pop local 2
+pop local 1
+///////////////////////////
+push local 0
+push constant 1
+add
+pop local 0
+goto loop_s
+/////////////////////////////////////
+label loop_e
+push local 2
+goto END
+
+label nulti
+push constant 2
+goto END
+
+label prvi
+push constant 1
+goto END
+
+label END
+return
