@@ -1,0 +1,7 @@
+class Main{
+ function void main(){
+// do Screen.drawPixel(15,0);
+ do Graph.draw();
+ return;
+ }
+}

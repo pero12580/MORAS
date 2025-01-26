@@ -1,0 +1,193 @@
+class Vint{
+ field Array v;
+ field int capacity;
+
+ constructor Vint new(int n){                  //////////////// (b)
+  
+  if(n<0){
+   let capacity = 1;
+  }
+  else{
+   let capacity = Vint.pow(2,n);
+  }
+  let v = Array.new(capacity);
+  return this;
+ }
+
+ method int len(){                                /////////////(a)
+  var int ret;
+  let ret = capacity;
+  return ret;
+ }
+
+ method void set(int k, int val){              ///////////////////(c)
+  var Array novi;
+  var int i;
+  while((k>capacity) | (k=capacity)){ // ako treba poduplavat capacity
+   let novi = Array.new(capacity*2);  // napravljen novi array
+   let i = 0;
+   while(i<capacity){                     // novi popunjava starim
+    let novi[i] = v[i];
+    let i = i+1;
+   }
+   do v.dispose();                        // brise stari, nez jel portebno
+   let v = Array.new(capacity*2);  // pravi novi
+   let i = 0;
+   let capacity = capacity*2;
+   while(i<capacity){
+    let v[i] = novi[i];
+    let i = i+1;
+   }
+   do novi.dispose();                     // brise novi
+  } // kraj whilea koji povecava capacity ako je potrebno
+  let v[k] = val;
+  return;
+ }
+
+ method int get(int k){                          //////////////(c)
+  return v[k];
+ }
+
+ method void resize(int m){              ///////////////////////(d)
+  var Array novi;
+  var int temp, new_cap, i, min_cap_new;
+  if(m < 1){
+   let temp = v[0];
+   do v.dispose();
+   let v = Array.new(1);
+   let v[0] = temp;
+   let capacity = 1;
+   return;
+  }
+
+  let new_cap = Vint.pow(2,m);  // nova duljina polja
+
+  if(new_cap = capacity){return;} // ako se ne mijenja duljina  
+
+
+  let novi = Array.new(new_cap);
+  let i = 0;
+  let min_cap_new = Vint.min(new_cap, capacity);
+  while(i<min_cap_new){
+   let novi[i] = v[i];
+   let i = i+1;
+  }
+ 
+  do v.dispose();
+  let v = Array.new(new_cap);
+  let i = 0;
+  while(i<new_cap){
+   let v[i] = novi[i];
+   let i = i+1;
+  }
+  do novi.dispose();
+  let capacity = new_cap;
+  return;
+ // kraj if new_cap<capacity
+  
+  //ako je new_cap>capacity ide sve isto kao kod < , samo u while() ide minimum izmedu capacity i new_cap
+  
+ }
+
+ method void print(){
+ var int i, size;
+ let i = 0;
+ while(i<capacity){
+  do Output.printInt(v[i]);
+  do Output.printChar(" ");
+  let i = i+1;
+  }
+ return;
+ }
+
+ method void Dispose(){
+ do Memory.deAlloc(this);
+ return;
+ }
+
+ function bool is_eq(Vint v1, Vint v2){           /////////////////////////(e)
+  var int i, size_v1, size_v2;
+  let size_v1 = v1.len();
+  let size_v2 = v2.len();
+  if(~(size_v1 = size_v2)){ return false;}  // ako su razlicite duljine odma false
+
+  let i = 0;
+  
+  while(i<size_v1){
+   if(~(v1.get(i) = v2.get(i))) {return false;}  // ako im je bilo koji od elemenata razlicit odma false
+   let i = i+1;
+  }
+  return true;
+ }
+
+
+ method void swap(int a, int b){
+  var int temp;
+  let temp = v[a];
+  let v[a] = v[b];
+  let v[b] = temp;
+  return;
+  }
+
+ function bool elems(Vint v1, Vint v2){
+  var int i, j, size_v1, size_v2;
+  let i = 0;
+  let j = 0;
+  let size_v1 = v1.len();
+  let size_v2 = v2.len();
+  
+  if(~(size_v1 = size_v2)){return false;}
+  
+  while(i<size_v1){                           /////// sortirat prvi Vint
+   let j = i+1;
+   while(j<size_v1){
+    if(v1.get(i) > v1.get(j)){
+     do v1.swap(i,j);
+    }
+    let j = j+1;
+   }
+   let i = i+1;
+  }
+
+  let i = 0;
+  let j = 0;
+
+  while(i<size_v2){                           /////// sortirat drugi Vint
+   let j = i+1;
+   while(j<size_v2){
+    if(v2.get(i) > v2.get(j)){
+     do v2.swap(i,j);
+    }
+    let j = j+1;
+   }
+   let i = i+1;
+  }
+
+  let i = 0;
+  while(i<size_v1){                   ///////// ide jedan po jedan element i usporeduje, ako nisu isti postavi na false
+   if(~(v1.get(i) = v2.get(i))){ return false;}
+   let i = i+1;
+  }
+  return true;
+ }
+
+
+
+ 
+ function int pow(int a, int b){
+ var int count, res;
+ let count = 0;
+ let res = 1;
+ while(count < b){
+   let res = res*a;
+   let count = count+1;
+  }
+ return res;
+ }
+
+ function int min(int a, int b){
+  if(a<b) {return a;}
+  else {return b;}
+ }
+
+}

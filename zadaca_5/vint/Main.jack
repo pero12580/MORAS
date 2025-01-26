@@ -1,0 +1,34 @@
+class Main{
+ function void main(){
+ var Vint vector, vec;
+ var int size1, size2;
+ var bool res;
+ let vector = Vint.new(2);
+ let vec = Vint.new(2);
+
+
+ do vector.set(0,4);
+ do vector.set(1,3);
+ do vector.set(2,3);
+ do vector.set(3,1);
+
+ do vec.set(0,3);
+ do vec.set(1,3);
+ do vec.set(2,2);
+ do vec.set(3,1);
+
+ let size1 = vector.len();
+ let size2 = vec.len();
+
+ do Output.printInt(size1);
+ do Output.printInt(size2);
+ do Output.println();
+
+ let res = Vint.elems(vector, vec);
+
+ do Output.printInt(res);
+
+ do vector.Dispose();
+ return;
+ }
+}

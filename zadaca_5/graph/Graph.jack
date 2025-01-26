@@ -1,0 +1,24 @@
+class Graph {
+ function int f (int x) {
+  return x/2;                            ///// tu unositi funkciju z isprobat
+ }
+
+ function void draw() {
+  var int x,y;
+
+  ////////////// prvo nacrtat asimptote
+  do Screen.drawLine(0, 128, 255, 128);   ////
+  do Screen.drawLine(128, 0, 128, 255);  ///// cijeli ekran se moze iskoristit tu, (0,0) je (128,128) mislim
+
+  let x = -32;
+  
+  while(x<33){
+   let y = Graph.f(x);
+   if((y>-33) & (y<33)){        ////// provjerava da je vrijednos funkcije unutar [-32,32]
+    do Screen.drawPixel(x+128,128-y);//// graf gleda da je dolje lijevo 0,0 a ne gore lijevo pa zato 128-y
+   }
+   let x = x+1;
+  }
+  return;
+ }
+}

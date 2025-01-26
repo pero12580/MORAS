@@ -1,0 +1,30 @@
+class Main{
+    
+    function void main() {
+var Array arr, res;
+let arr = Array.new(3);
+let arr[0] = 5;
+let arr[1] = 1;
+let arr[2] = 3;
+
+do Output.printInt(arr[0]);
+do Output.println();
+do Output.printInt(arr[1]);
+do Output.println();
+do Output.printInt(arr[2]);
+do Output.println();
+
+do Qs.qsort(arr, 0,2);
+
+do Output.printInt(arr[0]);
+do Output.println();
+do Output.printInt(arr[1]);
+do Output.println();
+do Output.printInt(arr[2]);
+do Output.println();
+
+do arr.dispose();
+//do res.dispose();
+return;
+    }
+}
