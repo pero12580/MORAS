@@ -1,0 +1,592 @@
+class print{
+
+ function void del_print(){
+  do Screen.setColor(false);
+  do Screen.drawRectangle(320,175,420,200);
+  return;
+ }
+
+ function void wrong_input(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75);
+  do Output.printChar(82);
+  do Output.printChar(73);
+  do Output.printChar(86);
+  do Output.printChar(79);
+  do Output.printChar(32);
+  do Output.printChar(85);
+  do Output.printChar(78);
+  do Output.printChar(69);
+  do Output.printChar(83);
+  do Output.printChar(69);
+  do Output.printChar(78);
+  do Output.moveCursor(17,40); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90);
+  return;
+ }
+
+ function void impossible_move(){  // NEMOGUC\nPOTEZ
+  do Output.moveCursor(16,40);
+  do Output.printChar(78); 
+  do Output.printChar(69); 
+  do Output.printChar(77); 
+  do Output.printChar(79); 
+  do Output.printChar(71); 
+  do Output.printChar(85); 
+  do Output.printChar(67); 
+  do Output.moveCursor(17,40); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90);
+  return;
+ }
+
+ function void pawn_wrong_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40);
+
+  do Output.printChar(80); 
+  do Output.printChar(74); 
+  do Output.printChar(69); 
+  do Output.printChar(83); 
+  do Output.printChar(65); 
+  do Output.printChar(75); 
+  do Output.printChar(79); 
+  do Output.printChar(77); 
+
+  return;
+ }
+
+
+ function void rook_wrong_move(){  //KRIVI POTEZ\nTOPOM
+  do Output.moveCursor(16,40);
+
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40); 
+  do Output.printChar(84); 
+  do Output.printChar(79); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(77);
+
+ return;
+}
+
+ function void knight_wrong_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40);
+
+  do Output.printChar(75); 
+  do Output.printChar(79); 
+  do Output.printChar(78); 
+  do Output.printChar(74); 
+  do Output.printChar(69); 
+  do Output.printChar(77);
+
+  return;
+ }
+
+
+ function void bishop_wrong_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40);
+
+  do Output.printChar(76); 
+  do Output.printChar(79); 
+  do Output.printChar(86); 
+  do Output.printChar(67); 
+  do Output.printChar(69); 
+  do Output.printChar(77);
+
+  return;
+ }
+
+ function void king_wrong_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40);
+
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(65); 
+  do Output.printChar(76); 
+  do Output.printChar(74);
+  do Output.printChar(69); 
+  do Output.printChar(77);
+  return;
+ }
+
+
+ function void queen_wrong_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(73); 
+  do Output.printChar(86); 
+  do Output.printChar(73); 
+  do Output.printChar(32); 
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.moveCursor(17,40);
+
+  do Output.printChar(75); 
+  do Output.printChar(82); 
+  do Output.printChar(65); 
+  do Output.printChar(76); 
+  do Output.printChar(74); 
+  do Output.printChar(73); 
+  do Output.printChar(67); 
+  do Output.printChar(79); 
+  do Output.printChar(77);
+
+  return;
+ }
+
+ 
+ function void w_move(){
+	do Output.moveCursor(3,45);
+	do Output.printChar(66);
+	do Output.printChar(73);
+	do Output.printChar(74);
+	do Output.printChar(69);
+	do Output.printChar(76);
+	do Output.printChar(73);
+	do Output.printChar(32);
+	do Output.printChar(78);
+	do Output.printChar(65);
+	do Output.moveCursor(4,45);
+	do Output.printChar(80);
+	do Output.printChar(79);
+	do Output.printChar(84);
+	do Output.printChar(69);
+	do Output.printChar(90);
+	do Output.printChar(85);
+	return;
+ } 
+
+function void b_move(){
+  do Output.moveCursor(3,45);
+  do Output.printChar(67);
+  do Output.printChar(82);
+  do Output.printChar(78);
+  do Output.printChar(73);
+  do Output.printChar(32);
+  do Output.printChar(78);
+  do Output.printChar(65);
+  do Output.printChar(32);
+  do Output.printChar(32);
+  do Output.moveCursor(4,45);
+  do Output.printChar(80);
+  do Output.printChar(79);
+  do Output.printChar(84);
+  do Output.printChar(69);
+  do Output.printChar(90);
+  do Output.printChar(85);
+  return;
+ }
+ 
+ function void starting_screen(){
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(66); 
+		do Output.printChar(82); 
+		do Output.printChar(79); 
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(83); 
+		do Output.printChar(76); 
+		do Output.printChar(73); 
+		do Output.printChar(33); 
+		do Output.printChar(33); 
+		do Output.printChar(33); 
+		do Output.println();
+		do Output.println(); 
+		do Output.printChar(85); 
+		do Output.printChar(80); 
+		do Output.printChar(85); 
+		do Output.printChar(84); 
+		do Output.printChar(69); 
+		do Output.printChar(58); 
+		do Output.println(); 
+		do Output.println(); 
+		//PLOČA:
+        do Output.printChar(80); 
+        do Output.printChar(76); 
+        do Output.printChar(79); 
+        do Output.printChar(67); 
+        do Output.printChar(65);
+		do Output.printChar(58); 
+        //
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32);
+		do Output.printChar(32); 
+		do Output.printChar(83); 
+		do Output.printChar(84); 
+		do Output.printChar(85); 
+		do Output.printChar(80); 
+		do Output.printChar(67); 
+		do Output.printChar(73); 
+		do Output.printChar(32); 
+		do Output.printChar(83); 
+		do Output.printChar(32); 
+		do Output.printChar(76); 
+		do Output.printChar(73); 
+		do Output.printChar(74); 
+		do Output.printChar(69); 
+		do Output.printChar(86); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(78); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(68); 
+		do Output.printChar(69); 
+		do Output.printChar(83); 
+		do Output.printChar(78); 
+		do Output.printChar(79); 
+		do Output.printChar(32); 
+		do Output.printChar(83); 
+		do Output.printChar(85); 
+		do Output.printChar(32); 
+		do Output.printChar(79); 
+		do Output.printChar(90); 
+		do Output.printChar(78); 
+		do Output.printChar(65); 
+		do Output.printChar(67); 
+		do Output.printChar(69); 
+		do Output.printChar(78); 
+		do Output.printChar(73); 
+		do Output.println(); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(79); 
+		do Output.printChar(68); 
+		do Output.printChar(32); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(32); 
+		do Output.printChar(72); 
+		do Output.println(); 
+		do Output.println(); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(82); 
+		do Output.printChar(69); 
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(86); 
+		do Output.printChar(73); 
+		do Output.printChar(32); 
+		do Output.printChar(79); 
+		do Output.printChar(68); 
+		do Output.printChar(32); 
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(76); 
+		do Output.printChar(74); 
+		do Output.printChar(69); 
+		do Output.printChar(32); 
+		do Output.printChar(80); 
+		do Output.printChar(82); 
+		do Output.printChar(69); 
+		do Output.printChar(77); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(71); 
+		do Output.printChar(79); 
+		do Output.printChar(82); 
+		do Output.printChar(69); 
+		do Output.printChar(32); 
+		do Output.printChar(83); 
+		do Output.printChar(85); 
+		do Output.printChar(32); 
+		do Output.printChar(79); 
+		do Output.printChar(90); 
+		do Output.printChar(78); 
+		do Output.printChar(65); 
+		do Output.printChar(67); 
+		do Output.printChar(69); 
+		do Output.printChar(78); 
+		do Output.printChar(73); 
+		do Output.println(); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(79); 
+		do Output.printChar(68); 
+		do Output.printChar(32); 
+		do Output.printChar(49); 
+		do Output.printChar(32); 
+		do Output.printChar(68); 
+		do Output.printChar(79); 
+		do Output.printChar(32); 
+		do Output.printChar(56); 
+		do Output.printChar(32); 
+		do Output.println(); 
+		do Output.println(); 
+//UNOS POTEZA: NPR. D2D4
+        do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(85); 
+		do Output.printChar(78); 
+		do Output.printChar(79); 
+		do Output.printChar(83); 
+		do Output.printChar(32); 
+		do Output.printChar(80); 
+		do Output.printChar(79); 
+		do Output.printChar(84); 
+		do Output.printChar(69); 
+		do Output.printChar(90); 
+		do Output.printChar(65); 
+		do Output.printChar(58); 
+        do Output.printChar(32); 
+        do Output.printChar(78); 
+        do Output.printChar(80); 
+        do Output.printChar(82); 
+        do Output.printChar(46); 
+        do Output.printChar(32);
+        do Output.printChar(68);
+        do Output.printChar(50);
+        do Output.printChar(68);
+        do Output.printChar(52);
+//
+        do Output.println(); 
+		do Output.println();
+		do Output.printChar(32); 
+		do Output.printChar(32); 
+		do Output.printChar(75); 
+		do Output.printChar(82); 
+		do Output.printChar(65); 
+		do Output.printChar(74); 
+		do Output.printChar(32); 
+		do Output.printChar(73); 
+		do Output.printChar(71); 
+		do Output.printChar(82); 
+		do Output.printChar(69); 
+		do Output.printChar(58); 
+		do Output.printChar(32); 
+		do Output.printChar(75); 
+		do Output.printChar(65); 
+		do Output.printChar(68); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(74); 
+		do Output.printChar(69); 
+		do Output.printChar(68); 
+		do Output.printChar(65); 
+		do Output.printChar(78); 
+		do Output.printChar(32); 
+		do Output.printChar(73); 
+		do Output.printChar(71); 
+		do Output.printChar(82); 
+		do Output.printChar(65); 
+		do Output.printChar(67); 
+		do Output.printChar(32); 
+		do Output.printChar(80); 
+		do Output.printChar(79); 
+		do Output.printChar(74); 
+		do Output.printChar(69); 
+		do Output.printChar(68); 
+		do Output.printChar(69); 
+		do Output.printChar(32); 
+		do Output.printChar(75); 
+		do Output.printChar(82); 
+		do Output.printChar(65); 
+		do Output.printChar(76); 
+		do Output.printChar(74); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(68); 
+		do Output.printChar(82); 
+		do Output.printChar(85); 
+		do Output.printChar(71); 
+		do Output.printChar(79); 
+		do Output.printChar(71); 
+		do Output.printChar(32); 
+		do Output.printChar(73); 
+		do Output.printChar(71); 
+		do Output.printChar(82); 
+		do Output.printChar(65); 
+		do Output.printChar(67); 
+		do Output.printChar(65); 
+		do Output.println(); 
+		do Output.println(); 
+		do Output.printChar(75); 
+		do Output.printChar(76); 
+		do Output.printChar(73); 
+		do Output.printChar(75); 
+		do Output.printChar(78); 
+		do Output.printChar(73); 
+		do Output.printChar(32);
+		do Output.printChar(66); 
+		do Output.printChar(73); 
+		do Output.printChar(76); 
+		do Output.printChar(79); 
+		do Output.printChar(32); 
+		do Output.printChar(83); 
+		do Output.printChar(84); 
+		do Output.printChar(79); 
+		do Output.printChar(32); 
+		do Output.printChar(90); 
+		do Output.printChar(65); 
+		do Output.printChar(32); 
+		do Output.printChar(78); 
+		do Output.printChar(65); 
+		do Output.printChar(83); 
+		do Output.printChar(84); 
+		do Output.printChar(65); 
+		do Output.printChar(86); 
+		do Output.printChar(65); 
+		do Output.printChar(75); 
+		do Output.printChar(46); 
+		do Output.printChar(46); 
+		do Output.printChar(46);
+    return;
+ }
+
+ function void ending_screen(){
+	do Output.moveCursor(16,40);
+	do Output.printChar(83);
+	do Output.printChar(65);
+	do Output.printChar(72);
+	do Output.printChar(45);
+	do Output.printChar(77);
+	do Output.printChar(65);
+	do Output.printChar(84);
+	do Output.printChar(33);
+	do Output.moveCursor(17,40);
+	do Output.printChar(75); 
+	do Output.printChar(76); 
+	do Output.printChar(73); 
+	do Output.printChar(75); 
+	do Output.printChar(78); 
+	do Output.printChar(73); 
+	do Output.printChar(32);
+	do Output.printChar(66); 
+	do Output.printChar(73); 
+	do Output.printChar(76); 
+	do Output.printChar(79); 
+	do Output.printChar(32); 
+	do Output.printChar(83); 
+	do Output.printChar(84); 
+	do Output.printChar(79); 
+	do Output.printChar(32);  
+	do Output.printChar(46); 
+	do Output.printChar(46); 
+	do Output.printChar(46);
+
+
+
+	while(Keyboard.keyPressed() = 0){}
+	return;
+ }
+
+}

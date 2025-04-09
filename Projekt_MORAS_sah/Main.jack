@@ -1,0 +1,70 @@
+class Main{
+ function void main(){
+  var sah s;
+  var int i, k;
+  var Array input_koo;
+
+
+
+  do print.starting_screen();
+  while(Keyboard.keyPressed() = 0){}
+  do Screen.clearScreen();
+  while(~(Keyboard.keyPressed() = 0)){}
+
+  let s = sah.starting_pos();
+  do print.w_move();
+  
+  let input_koo = Array.new(4);
+  let i = 0;
+  let k = 0;
+
+   // .checkmate() je funkcija koja provjerava je li bijeli kralj u igri i je li crni kralj u igri, ako jedan od njih nije
+   // proglasit kraj igre i protivnika
+  while((~(s.checkmate()))){
+//   do Screen.setColor(true);
+   while(Keyboard.keyPressed() = 0){}
+   do Screen.setColor(false);
+   do Screen.drawRectangle(320,220,350,232);
+//   do Screen.setColor(true);
+
+   while(i<4){     // 4 jer treba unijeti x1,y1,x2,y2
+    let k = Keyboard.keyPressed();
+    if(~(k = 0)){
+     if((i = 0) | (i = 2)){
+      let input_koo[i] = k-64;      // unos slova
+     }
+     else{
+      let input_koo[i] = 9-(k-48);   // iz nekog razloga od ascii vrijednosti broja se treba jos oduzet 48, a ide 9-(k-48), jer je dolje lijevo na ploči a1 koordinata, a na a8 kooordinata
+     }
+     do Output.moveCursor(20,40+i);
+     do Output.printChar(k);  // ispisuje potez koji se igra
+
+     let i = i+1;
+
+     while(~(Keyboard.keyPressed() = 0)){}      // da se ne inputa vise od jednog broja
+                                                                 // tj ceka da se pusti tipka prije neg procita iducu
+    }
+   }
+
+   do print.del_print();
+
+   
+   if((s.move_is_legal(input_koo[0], input_koo[1], input_koo[2], input_koo[3]))){
+// ispisuje koji je igrac na potezu
+    if((s.pl() = 0) ){do print.w_move();}
+    else{do print.b_move();}
+    do s.move(input_koo[0], input_koo[1], input_koo[2], input_koo[3]);
+    
+   }
+   
+   let i = 0;
+
+  }
+
+
+  do print.ending_screen();
+
+  return;
+ }
+
+}

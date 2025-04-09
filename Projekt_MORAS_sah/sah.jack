@@ -1,0 +1,499 @@
+class sah{
+ field int player;  // 0 ako je crni, 1 ako je bijeli , promjeni se tak da player=1-player svaki put
+ field Array state; 
+
+ //dodat tu jos dva fielda, bool crna__rosada i bijela_rosada, kad se pomakne crni top ili kralj crna_rosada = false i tjt
+ // kako upisat da se zeli rosada? kako provjerit da nema nis izmedu kralja i kojeg god topa i da se ne preskace sah? 
+                            
+ method int pl(){return player;}
+ method Array st(){return state;}
+
+
+ 
+ method bool checkmate(){
+  var int i;
+
+  let i = 0;
+
+  while((i<64) & (~(state[i] = 5))){ // provjerava je li crni kralj na ploci
+   let i = i+1;
+  }
+  if(i = 64){return true;}
+
+  let i = 0;
+
+  while((i<64) & (~(state[i] = 11))){ // provjerava je li bijeli kralj na ploci
+   let i = i+1;
+  }
+  if(i = 64){return true;}
+
+  return false;
+ }
+
+
+
+
+ method bool move_is_legal(int x1, int y1, int x2, int y2){
+
+  var int i, piece, destination_index, destination_state;
+  var Array X, Y;
+
+  // unijet koordinatu kralja, i koordinatu di kralj zavrsi nakon rosade, a ja cu ovdje unutar if-a pozvat move(top tam di treba)
+
+  
+
+  if((((x1<1) | (x1>8)) | ((x2<1) | (x2>8))) | (((y1<1) | (y1>8)) | ((y2<1) | (y2>8)))){ // gleda je li potez uopce na ploci
+   do print.wrong_input();
+   return false;
+  }
+
+  let piece = state[(x1-1)+((y1-1)*8)];
+
+  let destination_index = (x2-1)+((y2-1)*8);
+  let destination_state = state[destination_index];
+
+
+
+  
+
+  if(((piece > player*6) & (piece < player*6 +7)) & ((destination_state = 0) | ( (destination_state > ((1-player)*6)) & (destination_state < (((1-player)*6)+7)) ) ) ){    
+// npr player = 1 (bijeli), njegove figure su 7,8,9,10,11,12 i spadaju u raspon od <6,13>, isto ako je crni n redu tj player = 0, raspon njegovih figura je <0,7> ne ukljucujuci
+// takoder destinacija mora biti ili = 0 ili protivnicka figurica
+
+   if(piece = ((player*6)+1)){  // ako je pijun
+    if(player = 0){
+     if((((piece = 1) & (x1 = x2)) & ( (y1 +1 = y2) | ((y1 = 2) & (y1 +2 = y2)) )) & (destination_state=0)){  // nez zas +1 radi a ne -1 al ae, mislim da je zbog linije 35 vjv
+      return true;  // ako se nalazi na pocetnoj poziciji smije se pomaknut 2 napirjed, inace samo po jedan i to ako je state[destinacija] = protivnicka figura
+     }
+     if((((piece = 1) & ((x2 = (x1+1)) | (x2 = (x1-1)))) & (y1 +1 = y2)) &  (destination_state >6)){
+      return true;
+     }
+    }
+    if(player = 1){
+     if((((piece = 7) & (x1 = x2)) & ( (y1 -1 = y2) | ((y1 = 7) & (y1 -2 = y2)) )) & (destination_state=0)){
+      return true;
+     }
+     if((((piece = 7) & ((x2 = (x1+1)) | (x2 = (x1-1)))) & (y1 -1 = y2) ) & (destination_state <7)){  // isto za bijelog pijuna sve
+      return true;
+     } 
+    }
+    
+//!!!!!!!!!!!!!!!!!! jos napravit da kad dode do kraja postane kraljica
+    
+    
+    do print.pawn_wrong_move();
+    
+   }  // kraj ako je pijun
+
+   if(piece = ((player*6)+2)){            // ako je top
+    //provjerit jel se nalazi na plusu(putanji od topa) i ako je destinacija = 0,  jel put do tam isto =0, sa 4 if-a ovisno jesu li x1<x2, x1>x2, y1<y2, y1>y2
+    if((x1 = x2) | (y1 = y2)){
+     if(x1 = x2){
+      //let i = 0;
+      let i = y1;
+      if(y2 > y1){  // ako se top miče prema DOLJE
+       let i = i+1;
+       while((i<y2) & (state[(x1-1) + ((i-1)*8)] = 0)){
+        let i = i+1;
+       }
+      }  // kraj ako se pomiče DOLJE
+      if(y2<y1){  // ako se top miče prema GORE
+       let i = i-1;
+       while((i>y2) & (state[(x1-1) + ((i-1)*8)] = 0)){
+        let i = i-1;
+       }
+      } // kraj ako se pomice GORE
+      if(i = y2) {return true;}  // top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+     }
+     if(y1 = y2){
+      let i = x1;
+      if(x2 > x1){  // ako se top miče prema DESNO
+       let i = i+1;
+       while((i<x2) & (state[(i-1) + ((y1-1)*8)] = 0)){
+        let i = i+1;
+       }
+      }  // kraj ako se pomiče DESNO
+      if(x2<x1){  // ako se top miče prema LIJEVO
+       let i = i-1;
+       while((i>x2) & (state[(i-1) + ((y1-1)*8)] = 0)){
+        let i = i-1;
+       }
+      } // kraj ako se pomice LIJEVO
+
+      if( (i = x2) )  {return true;}  // top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+     }
+    }
+    
+    do print.rook_wrong_move();
+    
+   }  // kraj ako je top
+
+   if(piece = ((player*6)+3)){  // ako je konj
+    // napravit array mogucih destinacija (max 8), i provjerit jel se x2,y2 nalazi u popisu
+    // dva arraya od velicine 8, array X i array Y, koordinata je (x[a],y[a])
+
+    let X = Array.new(8);
+    let Y = Array.new(8);
+
+    // lijevo dva pa gore pa dole
+    let X[0] = x1-2-1;  // -1 jer state ide od 0 do 63, ne od 1 do 64
+    let X[1] = x1-2-1;
+    let Y[0] = (y1-1-1); // jedan gore
+    let Y[1] = (y1+1-1); // jedan dolje
+
+    // desno dva pa gore pa dole
+    let X[2] = x1+2-1;
+    let X[3] = x1+2-1;
+    let Y[2] = (y1-1-1); // jedan gore
+    let Y[3] = (y1+1-1); // jedan dolje
+
+    // dva gore pa lijevo pa desno
+    let X[4] = x1-1-1;  // jedan lijevo
+    let X[5] = x1+1-1;  // jedan desno
+    let Y[4] = (y1-1-2);
+    let Y[5] = (y1-1-2);
+
+    // dva dole pa lijevo pa desno
+    let X[6] = x1-1-1;  // jedan lijevo
+    let X[7] = x1+1-1;  // jedan desno
+    let Y[6] = (y1-1+2);
+    let Y[7] = (y1-1+2);
+
+    let i = 0;
+
+    while(i<8){  // & (~((X[i] = x2-1) & (Y[i] = y2-1)))
+        if((X[i] = (x2-1)) & (Y[i] = (y2-1))){ return true; } ////// obrisat ovo Output ak sve valja
+      let i = i+1;
+    }
+    if(i = 8){
+      do print.knight_wrong_move();//krivi potez s konjem
+    }
+   }
+
+   if(piece = ((player*6)+4)){  // ako je lovac
+    let i = 1;
+    //ako ide gore desno, if(x2>x1 & y2<y1)
+    if((x2>x1) & (y2<y1)){
+     while((((x1+i) < x2) & ((y1-i) > y2)) & (state[((x1-1)+i)+(((y1-1)-i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1+i)) & (y2 = (y1-i))){return true;}
+    }
+    // ako ide dolje desno, if(x2>x1 & y2>y1)
+    if((x2>x1) & (y2>y1)){
+     while((((x1+i) < x2) & ((y1-i) < y2)) & (state[((x1-1)+i)+(((y1-1)+i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1+i)) & (y2 = (y1+i))){return true;}
+    }
+    // ako ide gore lijevo, if(x2<x1 & y2<y1)
+    if((x2<x1) & (y2<y1)){
+     while((((x1-i) > x2) & ((y1-i) > y2)) & (state[((x1-1)-i)+(((y1-1)-i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1-i)) & (y2 = (y1-i))){return true;}
+    }
+    // ako ide dolje lijevo, if(x2<x1 & y2>y1)
+    if((x2<x1) & (y2>y1)){
+     while((((x1-i) > x2) & ((y1+i) < y2)) & (state[((x1-1)-i)+(((y1-1)+i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1-i)) & (y2 = (y1+i))){return true;}
+    }
+
+    do print.bishop_wrong_move();  // krivi potez lovcem
+
+   }  // kraj ako je lovac
+
+   if(piece = ((player*6)+5)){  // ako je kralj
+    let X = Array.new(8);
+    let Y = Array.new(8);
+
+    let X[0] = x1-1+1; 
+    let Y[0] = y1-1-1;  // gore desno
+
+    let X[1] = x1-1+1;
+    let Y[1] = y1-1+1;  // dolje desno
+
+    let X[2] = x1-1-1;
+    let Y[2] = y1-1-1;  // gore lijevo
+
+    let X[3] = x1-1-1;
+    let Y[3] = y1-1+1;  // dolje lijevo
+
+    let X[4] = x1-1;
+    let Y[4] = y1-1-1;   // jedan gore
+
+    let X[5] = x1-1;
+    let Y[5] = y1-1+1;  // jedan dolje
+
+    let X[6] = x1-1+1;
+    let Y[6] = y1-1;    // jedan desno
+
+    let X[7] = x1-1-1;
+    let Y[7] = y1-1;    // jedan lijevo
+
+    let i = 0;
+
+    while(i<8){ 
+        if((X[i] = (x2-1)) & (Y[i] = (y2-1))){ return true; } ////// obrisat ovo Output ak sve valja
+      let i = i+1;
+    }
+    if(i = 8){
+      do print.king_wrong_move();
+    }
+   }  // kraj ako je kralj
+
+   if(piece = ((player*6)+6)){  // ako je kraljica
+
+   //provjerit jel se nalazi na plusu(putanji od topa) i  jel put do tam isto =0, sa 4 if-a ovisno jesu li x1<x2, x1>x2, y1<y2, y1>y2
+   if((x1 = x2) | (y1 = y2)){
+     if(x1 = x2){
+      //let i = 0;
+      let i = y1;
+      if(y2 > y1){  // ako se kraljica miče prema DOLJE
+       let i = i+1;
+       while((i<y2) & (state[(x1-1) + ((i-1)*8)] = 0)){
+        let i = i+1;
+       }
+      }  // kraj ako se pomiče DOLJE
+      if(y2<y1){  // ako se kraljica miče prema GORE
+       let i = i-1;
+       while((i>y2) & (state[(x1-1) + ((i-1)*8)] = 0)){
+        let i = i-1;
+       }
+      } // kraj ako se pomice GORE
+      if(i = y2) {return true;}  // kraljica dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+     }
+     if(y1 = y2){
+      let i = x1;
+      if(x2 > x1){  // ako se kraljica miče prema DESNO
+       let i = i+1;
+       while((i<x2) & (state[(i-1) + ((y1-1)*8)] = 0)){
+        let i = i+1;
+       }
+      }  // kraj ako se pomiče DESNO
+      if(x2<x1){  // ako se kraljica miče prema LIJEVO
+       let i = i-1;
+       while((i>x2) & (state[(i-1) + ((y1-1)*8)] = 0)){
+        let i = i-1;
+       }
+      } // kraj ako se pomice LIJEVO
+
+      if( (i = x2) )  {return true;}  // kraljica dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+     }
+    }  // kraj ako je putanja kraljice kao od topa
+
+    let i = 1;
+    //ako ide gore desno, if(x2>x1 & y2<y1)
+    if((x2>x1) & (y2<y1)){
+     while((((x1+i) < x2) & ((y1-i) > y2)) & (state[((x1-1)+i)+(((y1-1)-i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1+i)) & (y2 = (y1-i))){return true;}
+    }
+    // ako ide dolje desno, if(x2>x1 & y2>y1)
+    if((x2>x1) & (y2>y1)){
+     while((((x1+i) < x2) & ((y1-i) < y2)) & (state[((x1-1)+i)+(((y1-1)+i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1+i)) & (y2 = (y1+i))){return true;}
+    }
+    // ako ide gore lijevo, if(x2<x1 & y2<y1)
+    if((x2<x1) & (y2<y1)){
+     while((((x1-i) > x2) & ((y1-i) > y2)) & (state[((x1-1)-i)+(((y1-1)-i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1-i)) & (y2 = (y1-i))){return true;}
+    }
+    // ako ide dolje lijevo, if(x2<x1 & y2>y1)
+    if((x2<x1) & (y2>y1)){
+     while((((x1-i) > x2) & ((y1+i) < y2)) & (state[((x1-1)-i)+(((y1-1)+i)*8)] = 0)){
+      let i = i+1;
+     }   
+     if((x2 = (x1-i)) & (y2 = (y1+i))){return true;}
+    }
+    // kraj ako se kraljica krece diagonalno
+
+    do print.queen_wrong_move();  //krivi potez kraljicom
+
+   }  // kraj ako je kraljica
+
+
+
+  }  // kraj prvog if-a
+   else{
+   // ILEGALNO, mozda nes ispisat da se mice kriva figurica ili nesto sto uopce nije figurica ili da se ide jest vlastita figura, ovisno jel piece = 0 ili nes vise od 0, dat opet da igra istom igracu
+   do print.impossible_move();
+  }
+  
+
+  return false;
+ }  // kraj fje move_is_legal
+
+
+                                                              // unose se koordinate od (1..8), ne od (0..7)
+ method void move(int x1, int y1, int x2, int y2){ // ode na state[(x1-1)+(y1-1)*8], obrise s ekrana
+                                                             // i stavi false, ode na x2y2 , nacrta piece i stavi true
+  var int piece;
+
+  let player = 1-player; // promjena ko je na redu nakon poteza
+
+
+  let piece = state[(x1-1)+((y1-1)*8)];   // koja se figurica miče
+
+  let state[(x1-1)+((y1-1)*8)] = 0;   // s te kockice maknuta figurica
+  
+  do pieces.delSq(x1-1, y1-1);   // briše figuricu s trenutne kockice
+  do pieces.delSq(x2-1, y2-1);   // ako se na destinacij nalazi figurica nju briše
+
+  let state[(x2-1)+((y2-1)*8)] = piece;  // stavlja figuricu na destinaciju unutar state arraya
+
+// treba jos nacrtat na ekran figuricu na destinaciju
+  if(piece = 1){
+   do pieces.bPawnDraw(x2-1,y2-1);
+  }
+
+  if(piece = 2){
+   do pieces.bRookDraw(x2-1,y2-1);
+  }
+  if(piece = 3){
+   do pieces.bKnightDraw(x2-1,y2-1);
+  }
+  if(piece = 4){
+   do pieces.bBishopDraw(x2-1,y2-1);
+  }
+  if(piece = 5){
+   do pieces.bKingDraw(x2-1,y2-1);
+  }
+  if(piece = 6){
+   do pieces.bQueenDraw(x2-1,y2-1);
+  }                                                           ///// crne figurice kraj 
+
+
+if(piece = 7){
+   do pieces.wPawnDraw(x2-1,y2-1);
+  }
+
+  if(piece = 8){
+   do pieces.wRookDraw(x2-1,y2-1);
+  }
+  if(piece = 9){
+   do pieces.wKnightDraw(x2-1,y2-1);
+  }
+  if(piece = 10){
+   do pieces.wBishopDraw(x2-1,y2-1);
+  }
+  if(piece = 11){
+   do pieces.wKingDraw(x2-1,y2-1);
+  }
+  if(piece = 12){
+   do pieces.wQueenDraw(x2-1,y2-1);
+  }                                                   /////////// bijele figurice kraj
+  return;
+ }
+
+ constructor sah starting_pos(){
+  var int i;
+ 
+  let player = 1;
+
+  do sah.board();
+  do pieces.bBishopDraw(2,0);
+  do pieces.bBishopDraw(5,0);
+  do pieces.bKnightDraw(1,0);
+  do pieces.bKnightDraw(6,0);
+  do pieces.bRookDraw(0,0);
+  do pieces.bRookDraw(7,0);
+  do pieces.bKingDraw(4,0);
+  do pieces.bQueenDraw(3,0);
+
+  do pieces.wRookDraw(0,7);
+  do pieces.wRookDraw(7,7);
+  do pieces.wKnightDraw(1,7);
+  do pieces.wKnightDraw(6,7);
+  do pieces.wBishopDraw(2,7);
+  do pieces.wBishopDraw(5,7);
+  do pieces.wQueenDraw(3,7);
+  do pieces.wKingDraw(4,7);
+
+  let i = 0;
+  while(i<8){
+   do pieces.bPawnDraw(i,1);
+   let i = i+1;
+  }
+
+  let i = 0;
+  while(i<8){
+   do pieces.wPawnDraw(i,6);
+   let i = i+1;
+  }
+
+
+    // napravit Array velicine 64, 0 = nis, 1 =b pijun, 2 =b top, 3 =b konj, 4 =b lovac, 5 =b kralj, 6 =b kraljica, 7 =w pijun, 8 = w top, 9 = w konj, 10 = w lovac, 11 = w kralj, 12 = w kraljica 
+  let state = Array.new(64);
+
+  
+  let state[0] = 2;
+  let state[1] = 3;
+  let state[2] = 4;
+  let state[3] = 6;
+  let state[4] = 5;
+  let state[5] = 4;
+  let state[6] = 3;
+  let state[7] = 2;  // crni statring pozicija
+
+  let state[56] = 8;
+  let state[57] = 9;
+  let state[58] = 10;
+  let state[59] = 12;
+  let state[60] = 11;
+  let state[61] = 10;
+  let state[62] = 9;
+  let state[63] = 8;  // bijeli statring pozicija
+
+  let i = 8;
+
+  while(i<16){          // pijuni crni
+   let state[i] = 1;
+   let i = i+1;
+  }
+
+  let i = 48;
+  while(i<56){            // pijuni bijeli
+   let state[i] = 7;
+   let i = i+1;
+  }
+
+
+  return this;
+ }
+
+ function void board(){
+  var int i, offset;
+  do Screen.drawLine(0,0,255,0);
+  do Screen.drawLine(0,0,0,255);
+  do Screen.drawLine(255,0,255,255);
+  do Screen.drawLine(0,255,255,255);  // rubovi ploče
+
+  let i = 0;
+  let offset = 31;
+  
+  while(i<8){                                           // vertikalne linije ploče
+   do Screen.drawLine(offset, 0, offset, 255);
+   let offset = offset+32;
+   let i = i+1;
+  }
+
+  let i = 0;
+  let offset = 31;
+  while(i<8){                                                // horizontalne linije ploče
+   do Screen.drawLine(0, offset, 255, offset);
+   let offset = offset+32;
+   let i = i+1;   
+  }
+  return;
+ }
+
+
+}
