@@ -2,7 +2,7 @@ class Main{
  function void main(){
   var sah s;
   var int i, k;
-  var Array input_koo;
+  var Array input_koo, last_move;
 
 
 
@@ -34,7 +34,7 @@ class Main{
       let input_koo[i] = k-64;      // unos slova
      }
      else{
-      let input_koo[i] = 9-(k-48);   // iz nekog razloga od ascii vrijednosti broja se treba jos oduzet 48, a ide 9-(k-48), jer je dolje lijevo na ploči a1 koordinata, a na a8 kooordinata
+      let input_koo[i] = 9-(k-48);   // ide 9-(k-48), jer je dolje lijevo na ploči a1 koordinata, a ne a8 kooordinata
      }
      do Output.moveCursor(20,40+i);
      do Output.printChar(k);  // ispisuje potez koji se igra
@@ -53,9 +53,24 @@ class Main{
 // ispisuje koji je igrac na potezu
     if((s.pl() = 0) ){do print.w_move();}
     else{do print.b_move();}
-    do s.move(input_koo[0], input_koo[1], input_koo[2], input_koo[3]);
     
+
+    do s.move(input_koo[0], input_koo[1], input_koo[2], input_koo[3]);
+
+    if(s.pawn_in_last_row()){do s.pawn_to_queen(input_koo[2], input_koo[3], s.pl());}
    }
+
+   if(((((input_koo[0] = 18) & (input_koo[1] = 7)) & (input_koo[2] = 4)) & (input_koo[3] = 7))){ // ako je unos R2R2 tj potez se vraca
+      let last_move = s.last_move_arr();
+      do s.move(last_move[0],last_move[1], last_move[2], last_move[3]);
+      if((s.pl() = 1) ){do print.w_move();}
+      else{do print.b_move();}
+
+      do print.del_print();
+      do print.returned_move();
+   }
+
+   
    
    let i = 0;
 

@@ -3,8 +3,28 @@ class print{
  function void del_print(){
   do Screen.setColor(false);
   do Screen.drawRectangle(320,175,420,200);
+  do Screen.setColor(true);
   return;
  }
+
+ function void returned_move(){
+  do Output.moveCursor(16,40);
+  do Output.printChar(80); 
+  do Output.printChar(79); 
+  do Output.printChar(84); 
+  do Output.printChar(69); 
+  do Output.printChar(90); 
+  do Output.printChar(32); 
+  do Output.printChar(86); 
+  do Output.printChar(82); 
+  do Output.printChar(65); 
+  do Output.printChar(67); 
+  do Output.printChar(69); 
+  do Output.printChar(78);
+  return;
+  }
+
+
 
  function void wrong_input(){
   do Output.moveCursor(16,40);
@@ -518,7 +538,44 @@ function void b_move(){
 		do Output.printChar(67); 
 		do Output.printChar(65); 
 		do Output.println(); 
+		do Output.println();
 		do Output.println(); 
+//(vracanje jednog poteza: r2d2)
+		do Output.printChar(40);
+		do Output.printChar(86);
+		do Output.printChar(82);
+		do Output.printChar(65);
+		do Output.printChar(67);
+		do Output.printChar(65);
+		do Output.printChar(78);
+		do Output.printChar(74);
+		do Output.printChar(69);
+		do Output.printChar(32);
+		do Output.printChar(74);
+		do Output.printChar(69);
+		do Output.printChar(68);
+		do Output.printChar(78);
+		do Output.printChar(79);
+		do Output.printChar(71);
+		do Output.printChar(32);
+		do Output.printChar(80);
+		do Output.printChar(79);
+		do Output.printChar(84);
+		do Output.printChar(69);
+		do Output.printChar(90);
+		do Output.printChar(65);
+		do Output.printChar(58);
+		do Output.printChar(32);
+		do Output.printChar(82);
+		do Output.printChar(50);
+		do Output.printChar(68);
+		do Output.printChar(50);
+		do Output.printChar(41);
+
+		do Output.println(); 
+		do Output.println(); 
+		do Output.println();
+		
 		do Output.printChar(75); 
 		do Output.printChar(76); 
 		do Output.printChar(73); 

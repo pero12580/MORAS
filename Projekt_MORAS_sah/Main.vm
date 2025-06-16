@@ -1,4 +1,4 @@
-function Main.main 4
+function Main.main 5
 call print.starting_screen 0
 pop temp 0
 label WHILE_EXP0
@@ -193,7 +193,107 @@ pop pointer 1
 push that 0
 call sah.move 5
 pop temp 0
+push local 0
+call sah.pawn_in_last_row 1
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push local 0
+push constant 2
+push local 3
+add
+pop pointer 1
+push that 0
+push constant 3
+push local 3
+add
+pop pointer 1
+push that 0
+push local 0
+call sah.pl 1
+call sah.pawn_to_queen 4
+pop temp 0
+label IF_FALSE4
 label IF_FALSE2
+push constant 0
+push local 3
+add
+pop pointer 1
+push that 0
+push constant 18
+eq
+push constant 1
+push local 3
+add
+pop pointer 1
+push that 0
+push constant 7
+eq
+and
+push constant 2
+push local 3
+add
+pop pointer 1
+push that 0
+push constant 4
+eq
+and
+push constant 3
+push local 3
+add
+pop pointer 1
+push that 0
+push constant 7
+eq
+and
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push local 0
+call sah.last_move_arr 1
+pop local 4
+push local 0
+push constant 0
+push local 4
+add
+pop pointer 1
+push that 0
+push constant 1
+push local 4
+add
+pop pointer 1
+push that 0
+push constant 2
+push local 4
+add
+pop pointer 1
+push that 0
+push constant 3
+push local 4
+add
+pop pointer 1
+push that 0
+call sah.move 5
+pop temp 0
+push local 0
+call sah.pl 1
+push constant 1
+eq
+if-goto IF_TRUE6
+goto IF_FALSE6
+label IF_TRUE6
+call print.w_move 0
+pop temp 0
+goto IF_END6
+label IF_FALSE6
+call print.b_move 0
+pop temp 0
+label IF_END6
+call print.del_print 0
+pop temp 0
+call print.returned_move 0
+pop temp 0
+label IF_FALSE5
 push constant 0
 pop local 1
 goto WHILE_EXP2

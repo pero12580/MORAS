@@ -1,11 +1,6 @@
 class pieces{
 
  function void wRookDraw(int x, int y){
-//  do Screen.drawLine(x*32 + 8,y*32 + 26,x*32 + 24,y*32+26);
-//  do Screen.drawLine(x*32 + 11,y*32 + 21,x*32 + 20,y*32 + 21); // ----
-
-//  do Screen.drawLine(x*32 + 8,y*32 + 26,x*32 + 11,y*32 + 21); //  /   \
-//  do Screen.drawLine(x*32 + 24,y*32+26,x*32 + 20,y*32 + 21);
 //////
   do Screen.drawLine(x*32 + 8,y*32 + 26,x*32 + 24,y*32+26);  // ----
 
@@ -78,6 +73,10 @@ class pieces{
  
   do Screen.drawCircle(x*32+16,y*32+8,2);
 
+  do Screen.setColor(false);
+  do Screen.drawCircle(x*32+16,y*32+8, 1);
+  do Screen.setColor(true);
+
   do Screen.drawLine(x*32 + 13,y*32 + 15,x*32 + 19,y*32+15);  // --- kriz
   do Screen.drawLine(x*32 + 16,y*32 + 12,x*32 + 16,y*32+20);  // | kriz
   return;
@@ -120,6 +119,10 @@ class pieces{
 
   do Screen.drawLine(x*32 + 11,y*32+12,x*32 + 21,y*32+12);  // ---
   do Screen.drawCircle(x*32 + 16,y*32+8, 4);
+
+  do Screen.setColor(false);
+  do Screen.drawCircle(x*32 + 16,y*32+8, 3);
+  do Screen.setColor(true);
   return;
  }
 
@@ -152,11 +155,12 @@ class pieces{
 ////////////////////////////////////////////////////////////////////////////////////////////////// crne figurice
 
  function void bRookDraw(int x, int y){
+  var int i;
 ////// 8 26 24 22
   do Screen.drawRectangle(x*32 + 8, y*32 + 22, x*32 + 24, y*32 + 26);  // baza crnih figurica
 ////
-  do Screen.drawLine(x*32 + 11,y*32 + 21,x*32 + 11,y*32 + 10);  
-  do Screen.drawLine(x*32 + 20,y*32 + 21,x*32 + 20,y*32 + 10);  //  | |
+
+  do Screen.drawRectangle(x*32 + 11,y*32 + 10, x*32 + 20,y*32 + 21);
  
   do Screen.drawLine(x*32 + 8,y*32 + 10,x*32 + 23,y*32+10);  // ----
 
@@ -172,11 +176,15 @@ class pieces{
   do Screen.drawLine(x*32 + 17,y*32+8,x*32 + 20,y*32+8); // --
   do Screen.drawLine(x*32 + 20,y*32+8,x*32 + 20,y*32+6); // I gore
   do Screen.drawLine(x*32 + 20,y*32+6,x*32 + 23,y*32+6); // --
+
+  do Screen.drawRectangle(x*32 + 8, y*32+8, x*32 + 23,y*32+10);
+  do Screen.drawLine(x*32 + 8, y*32+7, x*32 + 11, y*32+7);
+  do Screen.drawLine(x*32 + 14, y*32+7, x*32 + 17, y*32+7);
+  do Screen.drawLine(x*32 + 20, y*32+7, x*32 + 23, y*32+7);
   return;
  }
 
  function void bKnightDraw(int x, int y){
-//  do Screen.drawLine(x*32 + 8,y*32 + 26,x*32 + 24,y*32+26);  // ----
 //// 
   do Screen.drawRectangle(x*32 + 8, y*32 + 22, x*32 + 24, y*32 + 26);  // baza crnih figurica
 ////
@@ -193,7 +201,30 @@ class pieces{
 
   do Screen.drawLine(x*32 + 16, y*32 + 14, x*32 + 8,y*32 + 22);  // prednji dio tijela
 
+
+  
+  do Screen.drawRectangle(x*32 + 16, y*32 + 6, x*32 + 24,y*32+26);
+
+  do Screen.drawLine(x*32 + 10, y*32 + 22, x*32 + 10, y*32 + 21);
+  do Screen.drawLine(x*32 + 11, y*32 + 22, x*32 + 11, y*32 + 20);
+  do Screen.drawLine(x*32 + 12, y*32 + 22, x*32 + 12, y*32 + 19);
+  do Screen.drawLine(x*32 + 13, y*32 + 22, x*32 + 13, y*32 + 18);
+  do Screen.drawLine(x*32 + 14, y*32 + 22, x*32 + 14, y*32 + 17);
+  do Screen.drawLine(x*32 + 15, y*32 + 22, x*32 + 15, y*32 + 16);
+
+  do Screen.drawLine(x*32 + 10, y*32 + 16, x*32 + 10, y*32 + 11);
+  do Screen.drawLine(x*32 + 11, y*32 + 15, x*32 + 11, y*32 + 10);
+  do Screen.drawLine(x*32 + 12, y*32 + 14, x*32 + 12, y*32 + 9);
+  do Screen.drawLine(x*32 + 13, y*32 + 14, x*32 + 13, y*32 + 8);
+  do Screen.drawLine(x*32 + 14, y*32 + 14, x*32 + 14, y*32 + 7);
+  do Screen.drawLine(x*32 + 15, y*32 + 14, x*32 + 15, y*32 + 7);
+
+  do Screen.drawLine(x*32 + 9, y*32 + 14, x*32 + 9, y*32 + 13);
+
+
+  do Screen.setColor(false);
   do Screen.drawLine(x*32 + 16, y*32 + 10, x*32 + 17, y*32 + 10);  // oko
+  do Screen.setColor(true);
   return;
  }
 
@@ -234,6 +265,17 @@ class pieces{
   do Screen.drawLine(x*32 + 20,y*32+8,x*32 + 16,y*32+4);
 
   do Screen.drawLine(x*32 + 16,y*32+8,x*32 + 17,y*32+6);
+
+
+  do Screen.drawRectangle(x*32 + 13,y*32+12, x*32 + 19,y*32 + 22);
+
+
+  do Screen.drawLine(x*32 + 11, y*32 + 22, x*32 + 11, y*32 + 20);
+  do Screen.drawLine(x*32 + 12, y*32 + 22, x*32 + 12, y*32 + 17);
+
+  do Screen.drawLine(x*32 + 21, y*32 + 22, x*32 + 21, y*32 + 20);
+  do Screen.drawLine(x*32 + 20, y*32 + 22, x*32 + 20, y*32 + 17);
+
   return;
  }
 
@@ -249,6 +291,16 @@ class pieces{
 
   do Screen.drawLine(x*32 + 11,y*32+12,x*32 + 21,y*32+12);  // ---
   do Screen.drawCircle(x*32 + 16,y*32+8, 4);
+
+  do Screen.drawRectangle(x*32 + 13,y*32+12, x*32 + 19, y*32 + 22);
+
+  do Screen.drawLine(x*32 + 11, y*32 + 22, x*32 + 11, y*32 + 20);
+  do Screen.drawLine(x*32 + 12, y*32 + 22, x*32 + 12, y*32 + 17);
+
+  do Screen.drawLine(x*32 + 21, y*32 + 22, x*32 + 21, y*32 + 20);
+  do Screen.drawLine(x*32 + 20, y*32 + 22, x*32 + 20, y*32 + 17);
+
+
   return;
  }
 
@@ -272,6 +324,26 @@ class pieces{
 
   do Screen.drawLine(x*32 + 21,y*32 + 22,x*32 + 26,y*32 + 11);
   do Screen.drawLine(x*32 + 26,y*32 + 11,x*32 + 24,y*32 + 22); // kraj krune
+
+  do Screen.drawLine(x*32 + 8,y*32 + 21, x*32 + 8,y*32+19);
+  do Screen.drawLine(x*32 + 9,y*32 + 22, x*32 + 8,y*32+16);
+  do Screen.drawLine(x*32 + 10,y*32 + 22, x*32 + 8,y*32+16);
+
+  do Screen.drawLine(x*32 + 13,y*32 + 22, x*32 + 11,y*32+16);
+  do Screen.drawLine(x*32 + 12,y*32 + 22, x*32 + 12,y*32+20);
+
+  do Screen.drawLine(x*32 + 15,y*32 + 22, x*32 + 15,y*32+16);
+  do Screen.drawLine(x*32 + 16,y*32 + 22, x*32 + 16,y*32+10);
+  do Screen.drawLine(x*32 + 17,y*32 + 22, x*32 + 17,y*32+16);
+
+  do Screen.drawLine(x*32 + 18,y*32 + 22, x*32 + 18,y*32+20);
+  do Screen.drawLine(x*32 + 19,y*32 + 22, x*32 + 20,y*32+16);
+  do Screen.drawLine(x*32 + 20,y*32 + 22, x*32 + 20,y*32+19);
+
+  do Screen.drawLine(x*32 + 21,y*32 + 22, x*32 + 21,y*32+19);
+  do Screen.drawLine(x*32 + 22,y*32 + 22, x*32 + 24,y*32+16);
+  do Screen.drawLine(x*32 + 23,y*32 + 22, x*32 + 24,y*32+16);
+
   return;
  }
 

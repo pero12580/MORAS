@@ -1,13 +1,15 @@
 class sah{
  field int player;  // 0 ako je crni, 1 ako je bijeli , promjeni se tak da player=1-player svaki put
- field Array state; 
+ field bool w_king_moved, b_king_moved, w_rook_left_moved, w_rook_right_moved, b_rook_left_moved, b_rook_right_moved;
+ field bool w_castling_left, w_castling_right, b_castling_left, b_castling_right;
+ field bool pawn_to_queen_bool;
+ field Array state, last_move; 
 
- //dodat tu jos dva fielda, bool crna__rosada i bijela_rosada, kad se pomakne crni top ili kralj crna_rosada = false i tjt
- // kako upisat da se zeli rosada? kako provjerit da nema nis izmedu kralja i kojeg god topa i da se ne preskace sah? 
-                            
+                        
  method int pl(){return player;}
  method Array st(){return state;}
-
+ method Array last_move_arr(){return last_move;}
+ method bool pawn_in_last_row(){return pawn_to_queen_bool;}
 
  
  method bool checkmate(){
@@ -30,7 +32,20 @@ class sah{
   return false;
  }
 
-
+ method void pawn_to_queen(int x,int y,int p){
+  if(p = 0){ // player obrnuto namjerno
+    let state[(x-1)+((y-1)*8)] = 12;
+    do pieces.delSq(x-1, y-1);
+    do pieces.wQueenDraw(x-1, y-1);
+  }
+  if(p = 1){
+    let state[(x-1)+((y-1)*8)] = 6;
+    do pieces.delSq(x-1, y-1);
+    do pieces.bQueenDraw(x-1, y-1);
+  }
+  let pawn_to_queen_bool = false;
+  return;
+ }
 
 
  method bool move_is_legal(int x1, int y1, int x2, int y2){
@@ -62,23 +77,25 @@ class sah{
 
    if(piece = ((player*6)+1)){  // ako je pijun
     if(player = 0){
-     if((((piece = 1) & (x1 = x2)) & ( (y1 +1 = y2) | ((y1 = 2) & (y1 +2 = y2)) )) & (destination_state=0)){  // nez zas +1 radi a ne -1 al ae, mislim da je zbog linije 35 vjv
-      return true;  // ako se nalazi na pocetnoj poziciji smije se pomaknut 2 napirjed, inace samo po jedan i to ako je state[destinacija] = protivnicka figura
+     if((((piece = 1) & (x1 = x2)) & ( (y1 +1 = y2) | ((y1 = 2) & (y1 +2 = y2)) )) & (destination_state=0)){  
+      if(y2 = 8){let pawn_to_queen_bool = true;}
+      return true;  // ako se nalazi na pocetnoj poziciji smije se pomaknut 2 napirjed, inace samo po jedan , ili jedan dijagonalno naprijed ako je state[destinacija] = protivnicka figura
      }
      if((((piece = 1) & ((x2 = (x1+1)) | (x2 = (x1-1)))) & (y1 +1 = y2)) &  (destination_state >6)){
+      if(y2 = 8){let pawn_to_queen_bool = true;}
       return true;
      }
     }
     if(player = 1){
      if((((piece = 7) & (x1 = x2)) & ( (y1 -1 = y2) | ((y1 = 7) & (y1 -2 = y2)) )) & (destination_state=0)){
+      if(y2 = 1){let pawn_to_queen_bool = true;}
       return true;
      }
      if((((piece = 7) & ((x2 = (x1+1)) | (x2 = (x1-1)))) & (y1 -1 = y2) ) & (destination_state <7)){  // isto za bijelog pijuna sve
+      if(y2 = 1){let pawn_to_queen_bool = true;}
       return true;
      } 
     }
-    
-//!!!!!!!!!!!!!!!!!! jos napravit da kad dode do kraja postane kraljica
     
     
     do print.pawn_wrong_move();
@@ -103,7 +120,15 @@ class sah{
         let i = i-1;
        }
       } // kraj ako se pomice GORE
-      if(i = y2) {return true;}  // top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+      if(i = y2) {
+        if((((player = 1) & (x1 = 1)) & (y1 = 1))){ let w_rook_left_moved = true;}
+        if((((player = 1) & (x1 = 8)) & (y1 = 1))){ let w_rook_right_moved = true;}
+        if((((player = 0) & (x1 = 1)) & (y1 = 8))){ let b_rook_left_moved = true;}
+        if((((player = 0) & (x1 = 8)) & (y1 = 8))){ let b_rook_right_moved = true;}
+
+
+        return true;
+        }  // top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
      }
      if(y1 = y2){
       let i = x1;
@@ -120,7 +145,14 @@ class sah{
        }
       } // kraj ako se pomice LIJEVO
 
-      if( (i = x2) )  {return true;}  // top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+      if( (i = x2) )  {// top dode do destinacije bez ikakvih prepreka izmedu ak ide gore dolje
+        if((((player = 1) & (x1 = 1)) & (y1 = 1))){ let w_rook_left_moved = true;}
+        if((((player = 1) & (x1 = 8)) & (y1 = 1))){ let w_rook_right_moved = true;}
+        if((((player = 0) & (x1 = 1)) & (y1 = 8))){ let b_rook_left_moved = true;}
+        if((((player = 0) & (x1 = 8)) & (y1 = 8))){ let b_rook_right_moved = true;}  // nez ak radi
+
+        return true;
+        } 
      }
     }
     
@@ -236,9 +268,41 @@ class sah{
     let i = 0;
 
     while(i<8){ 
-        if((X[i] = (x2-1)) & (Y[i] = (y2-1))){ return true; } ////// obrisat ovo Output ak sve valja
+        if((X[i] = (x2-1)) & (Y[i] = (y2-1))){ 
+          if(player = 1) {let w_king_moved = true;}
+          if(player = 2) {let b_king_moved = true;}
+
+          return true; 
+          }
       let i = i+1;
     }
+
+
+    //rosada
+    if(((player = 1) & (~(w_king_moved)))){
+      if((((((x2 = (x1+2)) & (y2 = y1)) & ((~(w_rook_right_moved)))) & (state[61] = 0)) & (state[62] = 0))){
+        // da se kralj pomice za dva desno, da se desni top nije pomako, da nema nis izmedu
+        let w_castling_right = true;
+        return true;
+      }
+      if(((((((x2 = (x1-2)) & (y2 = y1)) & ((~(w_rook_left_moved)))) & (state[57] = 0)) & (state[58] = 0)) & (state[59] = 0))){
+        let w_castling_left = true;
+        return true;
+      }
+    }
+
+    if(((player = 0) & (~(b_king_moved)))){
+      if((((((x2 = (x1+2)) & (y2 = y1)) & ((~(b_rook_right_moved)))) & (state[5] = 0)) & (state[6] = 0))){
+        // da se kralj pomice za dva desno, da se desni top nije pomako, da nema nis izmedu
+        let b_castling_right = true;
+        return true;
+      }
+      if(((((((x2 = (x1-2)) & (y2 = y1)) & ((~(b_rook_left_moved)))) & (state[1] = 0)) & (state[2] = 0)) & (state[3] = 0))){
+        let b_castling_left = true;
+        return true;
+      }
+    }
+
     if(i = 8){
       do print.king_wrong_move();
     }
@@ -323,7 +387,7 @@ class sah{
 
   }  // kraj prvog if-a
    else{
-   // ILEGALNO, mozda nes ispisat da se mice kriva figurica ili nesto sto uopce nije figurica ili da se ide jest vlastita figura, ovisno jel piece = 0 ili nes vise od 0, dat opet da igra istom igracu
+   // ILEGALNO
    do print.impossible_move();
   }
   
@@ -336,6 +400,55 @@ class sah{
  method void move(int x1, int y1, int x2, int y2){ // ode na state[(x1-1)+(y1-1)*8], obrise s ekrana
                                                              // i stavi false, ode na x2y2 , nacrta piece i stavi true
   var int piece;
+
+
+  if(w_castling_left){
+    let w_castling_left = false;
+
+    do pieces.delSq(0,7);
+    let state[56] = 0;
+
+    do pieces.wRookDraw(3,7);
+    let state[59] = 8;
+  }
+  if(w_castling_right){
+    let w_castling_right = false;
+
+    do pieces.delSq(7,7);
+    let state[63] = 0;
+
+    do pieces.wRookDraw(5,7);
+    let state[61] = 8;
+
+  }
+  if(b_castling_left){
+    let b_castling_left = false;
+
+    do pieces.delSq(0,0);
+    let state[0] = 0;
+
+    do pieces.bRookDraw(3,0);
+    let state[3] = 2;
+
+  }
+  if(b_castling_right){
+    let b_castling_right = false;
+
+    do pieces.delSq(7,0);
+    let state[7] = 0;
+
+    do pieces.bRookDraw(5,0);
+    let state[5] = 2;
+
+  }
+
+
+
+  let last_move[0] = x2;
+  let last_move[1] = y2;
+  let last_move[2] = x1;
+  let last_move[3] = y1;
+
 
   let player = 1-player; // promjena ko je na redu nakon poteza
 
@@ -371,10 +484,9 @@ class sah{
   }                                                           ///// crne figurice kraj 
 
 
-if(piece = 7){
+  if(piece = 7){
    do pieces.wPawnDraw(x2-1,y2-1);
   }
-
   if(piece = 8){
    do pieces.wRookDraw(x2-1,y2-1);
   }
@@ -390,6 +502,7 @@ if(piece = 7){
   if(piece = 12){
    do pieces.wQueenDraw(x2-1,y2-1);
   }                                                   /////////// bijele figurice kraj
+
   return;
  }
 
@@ -397,6 +510,22 @@ if(piece = 7){
   var int i;
  
   let player = 1;
+
+  let last_move = Array.new(4);
+
+  //za rosadu
+  let w_king_moved = false;
+  let b_king_moved = false;
+  let w_rook_left_moved = false;
+  let w_rook_right_moved = false;
+  let b_rook_left_moved = false;
+  let b_rook_right_moved = false;
+  let w_castling_left = false;
+  let w_castling_right = false;
+  let b_castling_left = false;
+  let b_castling_right = false;
+
+  let pawn_to_queen_bool = false;
 
   do sah.board();
   do pieces.bBishopDraw(2,0);
