@@ -7,6 +7,86 @@ class print{
   return;
  }
 
+ function void del_pawn_promotion(){
+  do Screen.setColor(false);
+  do Screen.drawRectangle(320,60,500,120);
+  do Screen.setColor(true);
+  return;
+ }
+
+
+ function void pawn_promotion_print(){
+  do Output.moveCursor(6,40); // ODABRATI FIGURICU:
+  do Output.printChar(79);
+  do Output.printChar(68);
+  do Output.printChar(65);
+  do Output.printChar(66);
+  do Output.printChar(82);
+  do Output.printChar(65);
+  do Output.printChar(84);
+  do Output.printChar(73);
+  do Output.printChar(32);
+  do Output.printChar(70);
+  do Output.printChar(73);
+  do Output.printChar(71);
+  do Output.printChar(85);
+  do Output.printChar(82);
+  do Output.printChar(73);
+  do Output.printChar(67);
+  do Output.printChar(85);
+  do Output.printChar(58);
+
+  do Output.moveCursor(7,42); // K: KRALJICA
+  do Output.printChar(75);
+  do Output.printChar(58);
+  do Output.printChar(32);
+  do Output.printChar(75);
+  do Output.printChar(82);
+  do Output.printChar(65);
+  do Output.printChar(76);
+  do Output.printChar(74);
+  do Output.printChar(73);
+  do Output.printChar(67);
+  do Output.printChar(65);
+
+  do Output.moveCursor(8,42); // T: TOP
+  do Output.printChar(84);
+  do Output.printChar(58);
+  do Output.printChar(32);
+  do Output.printChar(84);
+  do Output.printChar(79);
+  do Output.printChar(80);
+
+  do Output.moveCursor(9,42); // L: LOVAC
+  do Output.printChar(76); 
+  do Output.printChar(58); 
+  do Output.printChar(32); 
+  do Output.printChar(76); 
+  do Output.printChar(79); 
+  do Output.printChar(86); 
+  do Output.printChar(65); 
+  do Output.printChar(67);
+
+  do Output.moveCursor(10,42); // S: SKAKAC
+  do Output.printChar(83);
+  do Output.printChar(58);
+  do Output.printChar(32);
+  do Output.printChar(83);
+  do Output.printChar(75);
+  do Output.printChar(65);
+  do Output.printChar(75);
+  do Output.printChar(65);
+  do Output.printChar(67);
+
+  return;
+ }
+
+
+  
+   
+
+
+
  function void returned_move(){
   do Output.moveCursor(16,40);
   do Output.printChar(80); 

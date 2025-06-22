@@ -11,6 +11,8 @@ class Main{
   do Screen.clearScreen();
   while(~(Keyboard.keyPressed() = 0)){}
 
+
+
   let s = sah.starting_pos();
   do print.w_move();
   

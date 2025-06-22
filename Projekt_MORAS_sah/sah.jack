@@ -32,17 +32,76 @@ class sah{
   return false;
  }
 
+
+
+
  method void pawn_to_queen(int x,int y,int p){
-  if(p = 0){ // player obrnuto namjerno
-    let state[(x-1)+((y-1)*8)] = 12;
-    do pieces.delSq(x-1, y-1);
-    do pieces.wQueenDraw(x-1, y-1);
+
+  var int k;
+
+  do print.pawn_promotion_print();
+
+  while(Keyboard.keyPressed() = 0){}
+
+  do print.del_pawn_promotion();
+
+  let k = Keyboard.keyPressed();
+
+  if(k = 84){ // top odabran
+   if(p = 0){ // player obrnuto namjerno
+     let state[(x-1)+((y-1)*8)] = 8;
+     do pieces.delSq(x-1, y-1);
+     do pieces.wRookDraw(x-1, y-1);
+   }
+   if(p = 1){
+     let state[(x-1)+((y-1)*8)] = 2;
+     do pieces.delSq(x-1, y-1);
+     do pieces.bRookDraw(x-1, y-1);
+   }
   }
-  if(p = 1){
-    let state[(x-1)+((y-1)*8)] = 6;
-    do pieces.delSq(x-1, y-1);
-    do pieces.bQueenDraw(x-1, y-1);
+
+  if(k = 76){ // lovac odabran
+   if(p = 0){ // player obrnuto namjerno
+     let state[(x-1)+((y-1)*8)] = 10;
+     do pieces.delSq(x-1, y-1);
+     do pieces.wBishopDraw(x-1, y-1);
+   }
+   if(p = 1){
+     let state[(x-1)+((y-1)*8)] = 4;
+     do pieces.delSq(x-1, y-1);
+     do pieces.bBishopDraw(x-1, y-1);
+   }
   }
+
+  if(k = 83){ // skakac odabran
+   if(p = 0){ // player obrnuto namjerno
+     let state[(x-1)+((y-1)*8)] = 9;
+     do pieces.delSq(x-1, y-1);
+     do pieces.wKnightDraw(x-1, y-1);
+   }
+   if(p = 1){
+     let state[(x-1)+((y-1)*8)] = 3;
+     do pieces.delSq(x-1, y-1);
+     do pieces.bKnightDraw(x-1, y-1);
+   }
+  }
+
+  if(k = 75){ // kraljica odabrana
+   if(p = 0){ // player obrnuto namjerno
+     let state[(x-1)+((y-1)*8)] = 12;
+     do pieces.delSq(x-1, y-1);
+     do pieces.wQueenDraw(x-1, y-1);
+   }
+   if(p = 1){
+     let state[(x-1)+((y-1)*8)] = 6;
+     do pieces.delSq(x-1, y-1);
+     do pieces.bQueenDraw(x-1, y-1);
+   }
+  }
+
+  while(~(Keyboard.keyPressed() = 0)){}
+
+
   let pawn_to_queen_bool = false;
   return;
  }
